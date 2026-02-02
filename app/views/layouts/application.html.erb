@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= display_meta_tags site: "디자인케어",
+                          title: "디자인케어 | 디자인 구독 서비스 (구독형 / 무제한)",
+                          description: "채용보다 효율적인 디자인 구독 서비스, 필요한 디자인을 무제한 요청하세요. 구독형으로 비용 절감과 퀄리티를 함께 높여드립니다.",
+                          og: {
+                            title: "디자인케어 | 디자인 구독 서비스 (구독형 / 무제한)",
+                            description: "채용보다 효율적인 디자인 구독 서비스, 필요한 디자인을 무제한 요청하세요. 구독형으로 비용 절감과 퀄리티를 함께 높여드립니다.",
+                            type: "website",
+                            url: "https://www.designcare.io/",
+                            image: image_path("webclip.png") # Fallback to webclip.png as og_image.jpg was missing
+                          },
+                          reverse: true
+    %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+# -----------------------------------------
+# 1. Security & Credentials (핵심 보안 - 절대 커밋 금지)
+# -----------------------------------------
+# 환경 변수 파일
+.env
+.env.*
+!.env.template
+!.env.example
+
+# Rails 보안 키 및 자격 증명 (마스터 키 유출 주의)
+/config/master.key
+/config/credentials/*.key
+
+# -----------------------------------------
+# 2. Database (SQLite 최적화)
+# -----------------------------------------
+# SQLite 데이터베이스 파일 및 저널/WAL 파일 (로컬 DB 유출 방지)
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/db/*.sqlite3-wal
+
+# -----------------------------------------
+# 3. Storage & Uploads (Active Storage)
+# -----------------------------------------
+# 로컬 저장소 및 임시 파일
+/storage/*
+# !/storage/.keep
+/tmp/storage/*
+
+# -----------------------------------------
+# 4. Rails Internal & Logs (레일즈 내부 및 로그)
+# -----------------------------------------
+# 로그 파일 및 임시 파일
+/log/*.log
+/tmp/
+
+# 에셋 빌드 결과물 및 캐시
+/public/assets
+/public/packs
+/public/packs-test
+/public/hotwire-components
+/node_modules
+/yarn-error.log
+.sass-cache
+
+# -----------------------------------------
+# 5. Testing (테스트 결과물)
+# -----------------------------------------
+/tmp/screenshots/
+/coverage/
+
+# -----------------------------------------
+# 6. Deployment (DigitalOcean & Cloudflare)
+# -----------------------------------------
+# Kamal (DigitalOcean 등 VPS 배포용 보안 파일)
+/.kamal/secrets
+/.kamal/env
+
+# Cloudflare (Wrangler/Workers/Pages 관련)
+.wrangler/
+.dev.vars
+
+# -----------------------------------------
+# 7. System & IDEs (시스템 및 개발 도구)
+# -----------------------------------------
+# macOS 시스템 파일
+.DS_Store
+
+# IDE 설정 (Cursor, VS Code, JetBrains)
+.vscode/
+.idea/
+*.swp
+*.swo
