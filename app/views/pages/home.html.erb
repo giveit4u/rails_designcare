@@ -239,33 +239,20 @@
           }
         </style>
     </div>
-    <div data-collapse="small" data-animation="default" data-duration="400" data-w-id="c2dffe95-155d-fc99-30ff-01ccc31c9d2d" data-easing="ease" data-easing2="ease" role="banner" class="navbar1_component w-nav">
+    <div data-collapse="small" data-animation="default" data-duration="400" data-w-id="c2dffe95-155d-fc99-30ff-01ccc31c9d2d" data-easing="ease" data-easing2="ease" role="banner" class="navbar1_component w-nav" data-controller="navbar">
       <div class="navbar13_container">
         <a href="#Top" class="navbar13_logo-link w-nav-brand"><%= image_tag "icon-dc-256-1.png", class: "navbar13_logo", alt: "", loading: "lazy" %></a>
-        <nav role="navigation" id="w-node-c2dffe95-155d-fc99-30ff-01ccc31c9d31-c31c9d2d" class="navbar13_menu w-nav-menu">
+        <nav role="navigation" id="w-node-c2dffe95-155d-fc99-30ff-01ccc31c9d31-c31c9d2d" class="navbar13_menu w-nav-menu" data-navbar-target="menu">
           <div class="navbar13_menu-link-wrapper">
             <a href="#category" class="navbar13_link w-nav-link">디자인케어</a>
             <a href="#service" class="navbar13_link w-nav-link">서비스</a>
             <a href="#price" class="navbar13_link w-nav-link">요금제</a>
             <a href="#process" class="navbar13_link w-nav-link">이용방법</a>
-            <div data-delay="200" data-hover="true" data-w-id="c2dffe95-155d-fc99-30ff-01ccc31c9d39" class="navbar13_menu-dropdown w-dropdown">
-              <div class="navbar13_dropdown-toggle w-dropdown-toggle">
-                <div>프로젝트</div>
-                <div class="dropdown-chevron w-embed"><svg width=" 100%" height=" 100%" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.55806 6.29544C2.46043 6.19781 2.46043 6.03952 2.55806 5.94189L3.44195 5.058C3.53958 4.96037 3.69787 4.96037 3.7955 5.058L8.00001 9.26251L12.2045 5.058C12.3021 4.96037 12.4604 4.96037 12.5581 5.058L13.4419 5.94189C13.5396 6.03952 13.5396 6.19781 13.4419 6.29544L8.17678 11.5606C8.07915 11.6582 7.92086 11.6582 7.82323 11.5606L2.55806 6.29544Z" fill="currentColor"></path>
-                  </svg></div>
-              </div>
-              <nav class="navbar13_dropdown-list w-dropdown-list">
-                <a href="#" class="navbar13_dropdown-link w-dropdown-link">Link Five</a>
-                <a href="#" class="navbar13_dropdown-link w-dropdown-link">Link Six</a>
-                <a href="#" class="navbar13_dropdown-link w-dropdown-link">Link Seven</a>
-              </nav>
-            </div>
           </div>
         </nav>
         <div id="w-node-c2dffe95-155d-fc99-30ff-01ccc31c9d45-c31c9d2d" class="navbar13_button-wrapper">
           <a href="#inquiry" class="button is-small w-button">구독문의</a>
-          <div class="navbar13_menu-button w-nav-button">
+          <div class="navbar13_menu-button w-nav-button" data-action="click->navbar#toggle" data-navbar-target="button">
             <div class="menu-icon2">
               <div class="menu-icon2_line-top"></div>
               <div class="menu-icon2_line-middle">
@@ -294,28 +281,46 @@
           </div>
           <div class="header76_content-right">
             <div class="header76_images-layout">
+              <%# 왼쪽 컬럼: 위로 무한 스크롤 %>
               <div class="header76_image-list-left">
-                <div id="w-node-_1b1db67b-f9aa-918f-75d7-5aa25f7be81e-56b52242" class="header76_image-list">
-                  <div id="w-node-_1b1db67b-f9aa-918f-75d7-5aa25f7be81f-56b52242" class="header76_image-wrapper"><%= image_tag "leaflet-design.avif", class: "header76_image", alt: "leaflet design", loading: "lazy", sizes: "(max-width: 479px) 100vw, 240px, 100vw", srcset: {"1789528_1599614269801.avif" => "500w", "leaflet-design.avif" => "1044w"} %></div>
-                  <div id="w-node-_1b1db67b-f9aa-918f-75d7-5aa25f7be821-56b52242" class="header76_image-wrapper"><%= image_tag "web-design.webp", class: "header76_image", alt: "web design", loading: "lazy", sizes: "(max-width: 479px) 100vw, 239.9921875px", srcset: {"668be5b1e98d53e89401571e_mood-shot-07-p-800-p-500.webp" => "500w", "web-design.webp" => "800w"} %></div>
-                  <div id="w-node-_1b1db67b-f9aa-918f-75d7-5aa25f7be823-56b52242" class="header76_image-wrapper"><%= image_tag "business-card-design.avif", class: "header76_image", alt: "business card design", loading: "lazy" %></div>
-                </div>
-                <div id="w-node-_1b1db67b-f9aa-918f-75d7-5aa25f7be825-56b52242" class="header76_image-list">
-                  <div id="w-node-_1b1db67b-f9aa-918f-75d7-5aa25f7be826-56b52242" class="header76_image-wrapper"><%= image_tag "67c182c497a5cddec7839092_6cc506df-7115-4fc2-ba0d-fc1909a1146a.avif", class: "header76_image", alt: "editorial design", loading: "lazy" %></div>
-                  <div id="w-node-_1b1db67b-f9aa-918f-75d7-5aa25f7be828-56b52242" class="header76_image-wrapper"><%= image_tag "detail-page_8.webp", class: "header76_image", alt: "detail page", loading: "lazy", sizes: "(max-width: 479px) 100vw, 239.9921875px", srcset: {"detail-page_8-p-500.webp" => "500w", "detail-page_8-p-800.webp" => "800w", "detail-page_8-p-1080.webp" => "1080w", "detail-page_8.webp" => "1251w"} %></div>
-                  <div id="w-node-_1b1db67b-f9aa-918f-75d7-5aa25f7be82a-56b52242" class="header76_image-wrapper"><%= image_tag "66684eaf5235c08cf2b3857e_project-image-richtershuels-p-800.webp", class: "header76_image", alt: "app design", loading: "lazy", sizes: "(max-width: 479px) 100vw, 239.9921875px", srcset: {"66684eaf5235c08cf2b3857e_project-image-richtershuels-p-800-p-500.webp" => "500w", "66684eaf5235c08cf2b3857e_project-image-richtershuels-p-800.webp" => "800w"} %></div>
+                <div class="hero-scroll-wrapper is-left">
+                  <div class="hero-scroll-list">
+                    <% (1..6).each do |i| %>
+                      <% ext = (i == 1 || i == 3 || i == 4) ? "avif" : "webp" %>
+                      <%# L05는 webp, L06도 webp로 확인됨 %>
+                      <div class="header76_image-wrapper">
+                        <%= image_tag "01_hero_image/hero_image-L#{sprintf('%02d', i)}.#{ext}", class: "header76_image", alt: "hero image left #{i}", loading: "lazy" %>
+                      </div>
+                    <% end %>
+                    <%# 무한 루프를 위한 복제본 %>
+                    <% (1..6).each do |i| %>
+                      <% ext = (i == 1 || i == 3 || i == 4) ? "avif" : "webp" %>
+                      <div class="header76_image-wrapper">
+                        <%= image_tag "01_hero_image/hero_image-L#{sprintf('%02d', i)}.#{ext}", class: "header76_image", alt: "hero image left #{i} clone", loading: "lazy" %>
+                      </div>
+                    <% end %>
+                  </div>
                 </div>
               </div>
+
+              <%# 오른쪽 컬럼: 위로 무한 스크롤 %>
               <div class="header76_image-list-right">
-                <div id="w-node-_1b1db67b-f9aa-918f-75d7-5aa25f7be82d-56b52242" class="header76_image-list">
-                  <div id="w-node-_1b1db67b-f9aa-918f-75d7-5aa25f7be82e-56b52242" class="header76_image-wrapper"><%= image_tag "detail-page_6.webp", class: "header76_image", alt: "detail page", loading: "lazy", sizes: "(max-width: 479px) 100vw, 239.9921875px", srcset: {"detail-page_6-p-500.webp" => "500w", "detail-page_6-p-800.webp" => "800w", "detail-page_6-p-1080.webp" => "1080w", "detail-page_6.webp" => "1251w"} %></div>
-                  <div id="w-node-_1b1db67b-f9aa-918f-75d7-5aa25f7be830-56b52242" class="header76_image-wrapper"><%= image_tag "business-card-design-.avif", class: "header76_image", alt: "business card design ", loading: "lazy" %></div>
-                  <div id="w-node-_1b1db67b-f9aa-918f-75d7-5aa25f7be832-56b52242" class="header76_image-wrapper"><%= image_tag "web-design_1.webp", class: "header76_image", alt: "web design", loading: "lazy", sizes: "(max-width: 479px) 100vw, 239.9921875px", srcset: {"web-design_1-p-500.webp" => "500w", "web-design_1.webp" => "800w"} %></div>
-                </div>
-                <div id="w-node-_1b1db67b-f9aa-918f-75d7-5aa25f7be834-56b52242" class="header76_image-list">
-                  <div id="w-node-_1b1db67b-f9aa-918f-75d7-5aa25f7be835-56b52242" class="header76_image-wrapper"><%= image_tag "sign-design.avif", class: "header76_image", alt: "sign design", loading: "lazy" %></div>
-                  <div id="w-node-_1b1db67b-f9aa-918f-75d7-5aa25f7be837-56b52242" class="header76_image-wrapper"><%= image_tag "app-design.webp", class: "header76_image", alt: "app design", loading: "lazy", sizes: "(max-width: 479px) 100vw, 239.9921875px", srcset: {"66684eafcd7c64e0fa37ff15_project-image-smove-p-800-p-500.webp" => "500w", "app-design.webp" => "800w"} %></div>
-                  <div id="w-node-_1b1db67b-f9aa-918f-75d7-5aa25f7be839-56b52242" class="header76_image-wrapper"><%= image_tag "editorial-design.avif", class: "header76_image", alt: "editorial design", loading: "lazy", sizes: "(max-width: 479px) 100vw, 240px", srcset: {"1789525_1599614208340.avif" => "500w", "editorial-design.avif" => "800w"} %></div>
+                <div class="hero-scroll-wrapper is-right">
+                  <div class="hero-scroll-list">
+                    <% (1..6).each do |i| %>
+                      <% ext = (i == 2 || i == 4 || i == 6) ? "avif" : "webp" %>
+                      <div class="header76_image-wrapper">
+                        <%= image_tag "01_hero_image/hero_image-R#{sprintf('%02d', i)}.#{ext}", class: "header76_image", alt: "hero image right #{i}", loading: "lazy" %>
+                      </div>
+                    <% end %>
+                    <%# 무한 루프를 위한 복제본 %>
+                    <% (1..6).each do |i| %>
+                      <% ext = (i == 2 || i == 4 || i == 6) ? "avif" : "webp" %>
+                      <div class="header76_image-wrapper">
+                        <%= image_tag "01_hero_image/hero_image-R#{sprintf('%02d', i)}.#{ext}", class: "header76_image", alt: "hero image right #{i} clone", loading: "lazy" %>
+                      </div>
+                    <% end %>
+                  </div>
                 </div>
               </div>
             </div>

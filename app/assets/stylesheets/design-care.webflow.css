@@ -5424,7 +5424,7 @@ figcaption {
   .modal-clause {
     padding-left: 0;
     padding-right: 0;
-    display: block;
+    display: none;
   }
 
   .paragraph-3 {

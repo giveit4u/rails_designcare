@@ -8611,8 +8611,124 @@ var hello_controller_default = class extends Controller {
   }
 };
 
+// app/javascript/controllers/smooth_scroll_controller.js
+var smooth_scroll_controller_default = class extends Controller {
+  connect() {
+    this.element.addEventListener("click", this.handleClick.bind(this));
+    window.addEventListener("scroll", this.handleScroll.bind(this));
+    this.handleScroll();
+  }
+  disconnect() {
+    this.element.removeEventListener("click", this.handleClick.bind(this));
+    window.removeEventListener("scroll", this.handleScroll.bind(this));
+  }
+  // 스크롤 위치에 따라 네비게이션 활성 상태 업데이트 (ScrollSpy)
+  handleScroll() {
+    const navLinks = document.querySelectorAll(".navbar13_link");
+    const scrollPosition = window.pageYOffset + 150;
+    navLinks.forEach((link) => {
+      const hash = link.hash;
+      if (!hash || hash === "#") return;
+      const section = document.querySelector(hash);
+      if (!section) return;
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
+      }
+    });
+  }
+  handleClick(event) {
+    const link = event.target.closest("a");
+    if (!link) return;
+    const url = new URL(link.href, window.location.origin);
+    if (url.pathname !== window.location.pathname) return;
+    if (!url.hash || url.hash === "#") return;
+    const targetElement = document.querySelector(url.hash);
+    if (!targetElement) return;
+    event.preventDefault();
+    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition - 100;
+    const duration = 1200;
+    let startTime = null;
+    const easeInOutCubic = (t, b, c, d) => {
+      t /= d / 2;
+      if (t < 1) return c / 2 * t * t * t + b;
+      t -= 2;
+      return c / 2 * (t * t * t + 2) + b;
+    };
+    const animation = (currentTime) => {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
+      window.scrollTo(0, run);
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation);
+      } else {
+        window.history.pushState(null, null, url.hash);
+        this.handleScroll();
+      }
+    };
+    requestAnimationFrame(animation);
+  }
+};
+
+// app/javascript/controllers/navbar_controller.js
+var navbar_controller_default = class extends Controller {
+  static targets = ["menu", "button"];
+  connect() {
+    this.isOpen = false;
+    this.ensureBackdrop();
+  }
+  ensureBackdrop() {
+    if (!document.querySelector(".nav-backdrop")) {
+      const backdrop = document.createElement("div");
+      backdrop.className = "nav-backdrop";
+      backdrop.setAttribute("data-action", "click->navbar#toggle");
+      document.body.appendChild(backdrop);
+    }
+  }
+  toggle() {
+    this.isOpen = !this.isOpen;
+    if (this.isOpen) {
+      this.openMenu();
+    } else {
+      this.closeMenu();
+    }
+  }
+  openMenu() {
+    this.menuTarget.classList.add("w--open");
+    this.buttonTarget.classList.add("w--open");
+    document.body.classList.add("menu-open");
+    document.body.style.overflow = "hidden";
+    const links = this.menuTarget.querySelectorAll("a");
+    links.forEach((link) => {
+      link.addEventListener("click", () => this.closeMenu(), { once: true });
+    });
+  }
+  closeMenu() {
+    this.menuTarget.classList.remove("w--open");
+    this.buttonTarget.classList.remove("w--open");
+    document.body.classList.remove("menu-open");
+    document.body.style.overflow = "";
+    this.isOpen = false;
+  }
+  // 메뉴 외부 클릭 시 닫기 (필요시)
+  clickAway(event) {
+    if (this.isOpen && !this.element.contains(event.target)) {
+      this.closeMenu();
+      this.isOpen = false;
+    }
+  }
+};
+
 // app/javascript/controllers/index.js
 application.register("hello", hello_controller_default);
+application.register("smooth-scroll", smooth_scroll_controller_default);
+application.register("navbar", navbar_controller_default);
 /*! Bundled license information:
 
 @hotwired/turbo/dist/turbo.es2017-esm.js:
