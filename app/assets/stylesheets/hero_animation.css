@@ -112,22 +112,29 @@ html {
   flex-direction: column;
   gap: 1rem;
   width: 100%;
-  /* 기본 애니메이션: 위로 이동 */
-  animation: scrollUp linear infinite;
-  will-change: transform;
 }
 
-/* 왼쪽 컬럼 애니메이션 (약간 빠르게) */
+/* 왼쪽 컬럼 애니메이션 (첫 이미지가 50% 잘린 상태로 시작) */
 .hero-scroll-wrapper.is-left .hero-scroll-list {
-  animation-duration: 60s;
+  animation: scrollUpLeft 60s linear infinite;
 }
 
-/* 오른쪽 컬럼 애니메이션 (약간 느리게 - 시각적 다양성) */
+/* 오른쪽 컬럼 애니메이션 (정위치에서 시작) */
 .hero-scroll-wrapper.is-right .hero-scroll-list {
-  animation-duration: 75s;
+  animation: scrollUpRight 60s linear infinite;
 }
 
-@keyframes scrollUp {
+@keyframes scrollUpLeft {
+  0% {
+    /* 전체 12장(원본6+복제6) 중 이미지 반 장 높이 만큼 위로 오프셋 -4.16% */
+    transform: translateY(-4.16%);
+  }
+  100% {
+    transform: translateY(-54.16%);
+  }
+}
+
+@keyframes scrollUpRight {
   0% {
     transform: translateY(0);
   }
@@ -232,7 +239,9 @@ html {
 /* 모바일 전용 네비게이션 바 디자인 (스크린샷 기준 알약 형태) */
 @media screen and (max-width: 991px) {
   .navbar1_component {
-    padding: 15px 5% 0 !important; /* 원래대로 복구 */
+    padding-top: 8px !important; /* 상단 여백 8px 확정 */
+    padding-left: 5% !important;
+    padding-right: 5% !important;
     background-color: transparent !important;
   }
 
@@ -245,6 +254,8 @@ html {
     justify-content: space-between !important;
     align-items: center !important;
     min-height: 56px !important;
+    position: relative !important;
+    z-index: 10 !important; /* 메뉴보다 위에 오도록 설정 */
   }
 
   .navbar13_logo {
@@ -287,31 +298,44 @@ html {
     display: none !important;
   }
   
-  /* 모바일 메뉴 리스트 (다크 카드 형태 복구) */
+  /* 모바일 메뉴 리스트 (평소에는 완전히 숨김) */
   .navbar13_menu {
-    display: none;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: none !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 50% !important;
+    width: 100vw !important;
     background-color: #1a1a1a !important; 
-    border-radius: 24px !important; 
-    margin-top: 12px !important;
-    padding: 12px 0 !important;
-    width: 94% !important;
-    left: 3% !important;
-    right: 3% !important;
-    height: auto !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+    border-top-left-radius: 24px !important;
+    border-top-right-radius: 24px !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    margin-top: 8px !important;
+    padding: 42px 0 !important;
+    height: calc(100vh - 80px) !important;
+    border: none !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+    z-index: 5 !important;
+    pointer-events: none;
   }
 
+  /* 메뉴 오픈 시 (내비바 하단 라인에서부터 미끄러져 내려오는 효과) */
   .navbar13_menu.w--open {
     display: block !important;
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-    position: absolute;
-    top: 100%;
-    z-index: 999;
+    pointer-events: auto !important;
+    animation: dropDownMenu 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes dropDownMenu {
+    0% {
+      /* 내비바 뒤쪽 영역에서 출발하여 하단으로만 나타나도록 클리핑 적용 */
+      transform: translateX(-50%) translateY(-100%);
+      clip-path: inset(100% 0 0 0); 
+    }
+    100% {
+      transform: translateX(-50%) translateY(0);
+      clip-path: inset(0% 0 0 0);
+    }
   }
 
   .navbar13_menu-link-wrapper {
@@ -321,7 +345,7 @@ html {
 
   .navbar13_link {
     color: #888 !important; 
-    padding: 18px 0 !important;
+    padding: 26px 0 !important; /* 텍스트와 라인 간격 추가 확대 (22px -> 26px) */
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
     font-size: 16px !important;
     font-weight: 500 !important;
@@ -342,23 +366,9 @@ html {
   }
 }
 
-/* 백드롭 오버레이 (메뉴 오픈 시 배경 어두워짐) */
+/* 백드롭 제거 (사용자 요청: 배경 어두워짐 제외) */
 .nav-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-  z-index: 998;
-}
-
-body.menu-open .nav-backdrop {
-  opacity: 1;
-  pointer-events: auto;
+  display: none !important;
 }
 
 /* 기존 히어로 관련 스타일 유지 */
@@ -370,7 +380,7 @@ body.menu-open .nav-backdrop {
   position: relative;
 }
 
-/* 애니메이션 일시 정지 (호버 시) */
-.hero-scroll-wrapper:hover .hero-scroll-list {
+/* 애니메이션 일시 정지 (이미지 영역 어디든 호버 시 좌/우 동시 정지) */
+.header76_images-layout:hover .hero-scroll-list {
   animation-play-state: paused;
 }
