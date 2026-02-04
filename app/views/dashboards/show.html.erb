@@ -1,0 +1,38 @@
+<% content_for :head do %>
+  <meta name="robots" content="noindex, nofollow">
+  <title>대시보드 | 디자인케어</title>
+<% end %>
+
+<div class="container mx-auto px-4 py-8">
+  <div class="bg-white rounded-xl shadow-md p-8">
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-3xl font-bold">환영합니다, <%= current_user.name %>님!</h1>
+      <%= button_to "로그아웃", logout_path, method: :delete, class: "text-sm text-gray-500 hover:text-red-500" %>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-blue-50 p-6 rounded-lg">
+        <h2 class="text-lg font-bold mb-2">구독 정보</h2>
+        <p class="text-gray-600">현재 이용 중인 플랜이 없습니다.</p>
+        <%= link_to "플랜 구경하기", root_path(anchor: "pricing"), class: "text-blue-600 mt-4 inline-block hover:underline" %>
+      </div>
+
+      <div class="bg-green-50 p-6 rounded-lg">
+        <h2 class="text-lg font-bold mb-2">디자인 요청</h2>
+        <p class="text-gray-600">진행 중인 요청이 없습니다.</p>
+        <%= link_to "새로운 요청 만들기", "#", class: "text-green-600 mt-4 inline-block hover:underline" %>
+      </div>
+
+      <div class="bg-gray-50 p-6 rounded-lg">
+        <h2 class="text-lg font-bold mb-2">정보 관리</h2>
+        <p class="text-gray-600"><%= current_user.email %></p>
+        <%= link_to "프로필 수정", "#", class: "text-gray-600 mt-4 inline-block hover:underline" %>
+      </div>
+    </div>
+
+    <div class="mt-12">
+      <h2 class="text-xl font-bold mb-4">최근 결제 내역</h2>
+      <%= link_to "모든 결제 내역 보기", payments_path, class: "text-sm text-blue-600 hover:underline" %>
+    </div>
+  </div>
+</div>
